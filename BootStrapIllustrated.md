@@ -16,9 +16,16 @@ We will record mean of this sample in m_sample1 variable and standard deviatio i
 
 
 ```r
+# Here i am setting seed so if it will be possible to reproduce same random sample dataset.
 set.seed(6516)
+
+# Random normal data set of size 30 stored into sample1
 sample1 <- rnorm(30)
+
+# Take mean of sample1
 m_sample1 <- mean(sample1)
+
+# Take standard deviation of sample1.
 sd_sample1 <- sd(sample1)
 ```
 
@@ -35,17 +42,22 @@ However, using bootstrap, if we take 1000 random samples from this same "sample1
 
 
 ```r
+# Define an numeric array vector of size 1000 to store means of 1000 random samples.
 reps <- 1000
 bootsample <- numeric(reps)
+
+# Run a for loop and store the means of 1000 samples in above defined vector.
 
 for (i in 1:reps) { 
 temp_sample <- sample(sample1, size=length(sample1), replace =TRUE)
 bootsample[i] <- mean(temp_sample)
 }
 
+# Taking mean and standard deviation of 1000 means stored in boot sample.
 m_bootsample <- mean(bootsample)
 sd_bootsample_30 <- sd_sample1/sqrt(30)
 
+# Displaying various values.
 m_sample1
 ```
 
@@ -82,6 +94,7 @@ Now if we take a histogram of all these 1000 samples of means, we should get a n
 
 
 ```r
+# Create a histogram using means stored in bootsample to see if we get normal distribution.
 hist(bootsample, main="Histogram of Means of Normal Sampling Distribution ", xlab="Means of Samples")
 ```
 
@@ -91,6 +104,7 @@ Now we will repeat the same process with a bigger sample size - lets say 50.
 
 
 ```r
+# Repeating same process as we did for sample size 30.
 set.seed(65162)
 sample2 <- rnorm(50)
 m_sample2 <- mean(sample2)
@@ -165,6 +179,7 @@ hist(bootsample, main="Histogram of Means of Normal Sampling Distribution ", xla
     
 
 ```r
+# Here we will repeat the same process but instead of random normal dataset, we will use random exponential #dataset.
   set.seed(65163)
   sample1 <- rexp(30)
   m_sample1 <- mean(sample1)
@@ -210,6 +225,8 @@ sd_bootsample_30
 ```
 
 ```r
+# Creating histograms for original data set of size 30 and 1000 means of random sample out of same 30 dataset.
+
 hist(sample1, main="Histogram of Initial Exponential Sample (size 30)", xlab = "Initial Sample")
 ```
 
